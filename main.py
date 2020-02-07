@@ -53,33 +53,34 @@ def encrypt (mess, f):
 	token = f.encrypt(mess.encode('utf-8'))
 	return token.decode('utf-8')
 
-def usrExist(usr):
+
+def usrExist (user):
 	cur.execute("SELECT user FROM accounts")
 	for user in cur.fetchall():
-		if user[0] == usr:
+		if user[0] == user:
 			return True
 		# print("[D]: user: ",user)
 	return False
 
-def createUsr (usr, pas):
-	# TODO: Check if user already exist
+
+def createUsr (user, pasw):
 	h = hashlib.blake2b()
 	salt = os.urandom(8)
 	salt = base64.urlsafe_b64encode(salt)
-	h.update(pas.encode('utf-8'))
+	h.update(pasw.encode('utf-8'))
 	h.update(salt)
 	pash = h.hexdigest()
 	print(pash, type(salt))
-	cur.execute("INSERT INTO accounts(user, hash, salt) VALUES(?, ?, ?)", (usr, pash, salt))
+	cur.execute("INSERT INTO accounts(user, hash, salt) VALUES(?, ?, ?)", (user, pash, salt))
 	db.commit()
 
 
-def verifyUsr (usr, pas):
+def verifyUsr (user, pasw):
 	h = hashlib.blake2b()
-	h.update(pas.encode('utf-8'))
-	cur.execute("SELECT salt FROM accounts WHERE user='" + usr + "'")
+	h.update(pasw.encode('utf-8'))
+	cur.execute("SELECT salt FROM accounts WHERE user='" + user + "'")
 	h.update(cur.fetchone()[0])
-	cur.execute("SELECT hash FROM accounts WHERE user='" + usr + "'")
+	cur.execute("SELECT hash FROM accounts WHERE user='" + user + "'")
 	if h.hexdigest() == cur.fetchone()[0]:
 		return True
 	return False
