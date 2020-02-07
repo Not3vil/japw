@@ -1,0 +1,4 @@
+*.sqlite
+*test*
+Pipfile
+.idea/*
