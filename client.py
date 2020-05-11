@@ -12,7 +12,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-
+#TODO: Make a function that can decrypt and rencrypt every account in case of password change
 #TODO: make class with the three function below us.
 def derKey (salt, key, enc):
 	'''Set up Cryptography parameters and returns a pakage uset to encrypt or decrypt'''
