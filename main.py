@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 " Server for GUI 
 " Author: Koustubh Saxena
@@ -16,7 +15,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 # TODO: Make this in its own database opening function
 # TODO: Decide if one or two dbs are required
-db = sqlite3.connect("Pass.sqlite")
+db = sqlite3.connect("Main.sqlite")
 cur = db.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS accounts(user TEXT,hash TEXT,salt TEXT)')
 cur.execute('CREATE TABLE IF NOT EXISTS passwords(name TEXT,data TEXT,salt TEXT)')
