@@ -1,5 +1,5 @@
 """
-= Client Backend 
+= Client Backend (non-UI)
 = Author: Koustubh Saxena
 = Ver 0.0
 """
@@ -12,7 +12,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-#TODO: Make a function that can decrypt and rencrypt every account in case of password change
+#TODO: Make a function that can decrypt and rencrypt every website in case of password change
 #TODO: make class with the three function below us.
 def derKey (salt, key, enc):
 	'''Set up Cryptography parameters and returns a pakage uset to encrypt or decrypt'''
@@ -46,7 +46,7 @@ def encrypt (mess, f):
 	return token.decode('utf-8')
 
 def storeCred(key, name, pasw, note = "NULL"):
-	'''Stores the password (passw) for account (name) with master_password (key) into the database'''
+	'''Stores the password (passw) for website (name) with master_password (key) into the database'''
 	#TODO: Check if the same name already exist in database
 	if note == "NULL":
 		note = "pass:" + pasw
@@ -59,7 +59,7 @@ def storeCred(key, name, pasw, note = "NULL"):
 	db.commit()
 
 def displayCred (key, name):
-	'''Returns the password and note [if any] for the Account (name) secured with master_passord (key)'''
+	'''Returns the password and note [if any] for the website (name) secured with master_passord (key)'''
 	cur.execute("SELECT salt FROM passwords WHERE name='" + name + "'")
 	salt = cur.fetchone()
 	if salt == None:

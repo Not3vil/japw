@@ -30,8 +30,8 @@ def verifyUsr (user, pasw):
 		return True
 	return False
 
-#TODO: delete user
-#TODO: Change Password
+#TODO: Func for Delete user
+#TODO: Func for Change Password
 
 db = sqlite3.connect("Main.sqlite")
 cur = db.cursor()
